@@ -51,9 +51,17 @@ var Bishop = function (config) {
   
   Bishop.prototype.moveTo = function(targetPosition, board) {    
     if (this.validateMove(targetPosition, board)) {
-        this.position = targetPosition.col + targetPosition.row;
-        console.log("HIi", targetPosition);
+        const targetPiece = board.getPieceAt(targetPosition);
         
+        if (targetPiece) {
+            if (targetPiece.color === this.color) {
+                return false;
+            }
+        }
+        
+        this.position = targetPosition.col + targetPosition.row;
         this.render();
+        return true;
     }
+    return false;
 };
