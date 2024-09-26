@@ -113,4 +113,20 @@
     pointer-events: none;
 }
 
+.graveyard {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 10px;
+}
+
+.killed {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    opacity: 0.5;
+}
 
