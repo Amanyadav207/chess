@@ -5,6 +5,7 @@
   "type": "commonjs",
   "dependencies": {
     "express": "^4.19.2",
+    "socket-chat-example": "file:",
     "socket.io": "^4.7.5"
   }
 }
