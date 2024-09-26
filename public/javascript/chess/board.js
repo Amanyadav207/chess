@@ -67,7 +67,7 @@ Board.prototype.boardClicked = function(event){
     }else{
         //update position of the selected piece to new position
         if(this.selectedPiece){
-            this.selectedPiece.moveTo(clickedCell);        
+            this.selectedPiece.moveTo(clickedCell, this);        
         }                
     }    
 }
