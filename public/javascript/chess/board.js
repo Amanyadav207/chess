@@ -67,6 +67,7 @@ Board.prototype.boardClicked = function(event){
         this.selectPiece(event.target, selectedPiece);
     }else{
         //update position of the selected piece to new position
+        console.log('clickedCell', clickedCell);
         if(this.selectedPiece.moveTo(clickedCell, this)) {
             if(this.selectedPiece){
                 if(selectedPiece) selectedPiece.kill();
