@@ -1,7 +1,7 @@
-var Piece = function(config) {
-    this.position = config.position || { x: 0, y: 0 };
-    this.color = config.color || 'white';
-};
+// var Piece = function(config) {
+//     this.position = config.position ;
+//     this.color = config.color;
+// };
 
 Piece.prototype.move = function(newPosition) {
     this.position = newPosition;
@@ -14,7 +14,7 @@ var Rook = function(config) {
 
 Rook.prototype = Object.create(Piece.prototype);
 
-Rook.prototype.move = function(newPosition) {
+Rook.prototype.moveTo = function(newPosition) {
     const currentX = this.position.x;
     const currentY = this.position.y;
     const newX = newPosition.x;
