@@ -2,6 +2,7 @@ var Board = function(config){
     this.root_id = config.root_id;
     this.$el = document.getElementById(this.root_id);
     this.generateBoardDom();
+    this.selectedPiece = null;
     this.addListeners();
 }
 
@@ -61,16 +62,20 @@ Board.prototype.boardClicked = function(event){
     this.clearSelection();    
     const clickedCell = this.getClickedBlock(event);
     const selectedPiece = this.getPieceAt(clickedCell)
-    if(selectedPiece){
+    if(selectedPiece && this.selectedPiece === null){
         //Add 'selected' class to the clicked piece    
         this.selectPiece(event.target, selectedPiece);
     }else{
         //update position of the selected piece to new position
-        if(this.selectedPiece){
-            this.selectedPiece.moveTo(clickedCell);        
-        }                
+        if(this.selectedPiece.moveTo(clickedCell, this)) {
+            if(this.selectedPiece){
+                if(selectedPiece) selectedPiece.kill();
+            }                
+        }
+        this.selectedPiece = null;       
     }    
 }
+
 
 Board.prototype.getPieceAt = function(cell){
     if (!cell || !cell.row || !cell.col) {
