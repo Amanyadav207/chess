@@ -3,6 +3,7 @@ var Board = function(config){
     this.$el = document.getElementById(this.root_id);
     this.generateBoardDom();
     this.addListeners();
+    this.currentTurn = 'white';
 }
 
 Board.prototype.addListeners = function(){
@@ -61,15 +62,24 @@ Board.prototype.boardClicked = function(event){
     this.clearSelection();    
     const clickedCell = this.getClickedBlock(event);
     const selectedPiece = this.getPieceAt(clickedCell)
-    if(selectedPiece){
+    if(selectedPiece && selectedPiece.color === this.currentTurn){
         //Add 'selected' class to the clicked piece    
         this.selectPiece(event.target, selectedPiece);
-    }else{
-        //update position of the selected piece to new position
-        if(this.selectedPiece){
-            this.selectedPiece.moveTo(clickedCell);        
-        }                
-    }    
+    }
+    else
+    {
+        if (this.selectedPiece)
+        {
+            this.selectedPiece.moveTo(clickedCell);
+            this.selectedPiece = null;
+            this.clearSelection();
+            this.toggleTurn();
+        }
+    }
+}
+
+Board.prototype.toggleTurn = function(){
+    this.currentTurn = this.currentTurn === 'white' ? 'black' : 'white';
 }
 
 Board.prototype.getPieceAt = function(cell){
@@ -199,3 +209,7 @@ Board.prototype.renderAllPieces = function() {
         }
     });
 };
+
+Board.prototype.capturePiece = function(piece){
+    
+}
